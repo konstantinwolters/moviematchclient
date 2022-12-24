@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex justify-content-center">
+
+        <div class="card col-md-4 m-2">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-sliders"></i> Your Session</h5>
+                <div th:each="user : ${currentSession.users}" class="form-control mt-2">
+                    <label for="users" class="form-check-label" th:text="${user.name}"></label>
+                    <input type="text" class="form-control mb-2" th:id="${user.id}"
+                        th:value="${baseUrl} + '/' + ${currentSession.uuid} + '/' + ${user.id}" disabled>
+                    <a href="#" class="btn btn-outline-dark" th:onclick="copyToClipboard([[${user.id}]])"> <i
+                            class="bi bi-clipboard"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+
+</html>

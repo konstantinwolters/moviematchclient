@@ -1,0 +1,95 @@
+.fade.modal-backdrop.newBackdrop.show{
+ opacity: 0.8;
+}
+
+.page-content {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #000000, #1a1a1a);
+}
+
+.auth-card {
+  background-color: rgb(0, 0, 0, 0.2);
+  /* box-shadow: 0 3px 16px rgb(0 0 0 / 0.4); */
+  border-radius: 20px;
+  padding: 10px 10%;
+}
+
+.logo-area {
+  padding: 20px 30%;
+  margin-top: 60px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.auth-title {
+  /* text-align: center; */
+  color: white;
+}
+
+.service-btn {
+  background-color: rgb(0, 0, 0, 0.2);
+  width: 100%;
+  color: white;
+  box-shadow: none !important;
+  border-color: rgb(206, 207, 207);
+}
+
+.service-btn:hover {
+  color: #ffffff;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.service-icon {
+  margin-right: 10px;
+}
+
+.separator {
+  width: 100%;
+  color: white;
+}
+
+.auth-input {
+  background: rgb(0, 0, 0, 0.2);
+  height: 45px;
+  border: none !important;
+  color: white;
+  box-shadow: none !important;
+}
+
+.auth-input:focus {
+  background: rgb(0, 0, 0, 0.3);
+  color: #66fcf1;
+}
+
+.input-info-text {
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.auth-btn {
+  background: #66fcf1;
+
+  width: 100%;
+
+  box-shadow: none !important;
+}
+
+.auth-btn:hover {
+  background: rgb(0, 0, 0, 0.3);
+  color: #66fcf1;
+}
+
+.text {
+  color: rgba(255, 255, 255, 0.822);
+}
+
+.text-link {
+  color: #66fcf1;
+}
+
+.text-link:hover {
+  color: #45a29e;
+}

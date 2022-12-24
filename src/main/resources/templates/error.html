@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+
+</head>
+
+<body>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="col-3">
+
+            <img th:src="@{/images/undraw_server_down.svg/}" class="img-fluid" alt="">
+            <h1 th:text="${errorMessage}"></h1>
+        </div>
+
+    </div>
+    <footer th:replace="~{fragments :: footer}"></footer>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enjoy</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+</head>
+
+<body class="bg-light">
+    <div class="d-flex justify-content-center">
+        <div class="card col-md-4 m-2 p-4">
+            <h1><i class="bi bi-film"></i> Movie Match</h1>
+            <img th:src="@{/images/moviestart.gif/}" class="img-fluid my-4" alt="">
+        </div>
+    </div>
+    </div>
+
+    <footer th:replace="~{fragments :: footer}"></footer>
+</body>
+
+</html>

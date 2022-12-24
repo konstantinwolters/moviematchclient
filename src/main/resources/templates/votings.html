@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+
+</head>
+
+<body class="bg-light">
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Match!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row justify-content-center">
+                    <div class="col-4">
+                        <img th:src="@{${likedMoviePosterPath}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-8">
+                        <h5>Das ur match brotha!</h5>
+                        <p>Watchu wanna do?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/enjoy}" class="btn btn-outline-danger">I'm done</a>
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- site -->
+    <div class="d-flex justify-content-center">
+        <div class="col-md-3 m-sm-2">
+            <div class="card text-bg-dark">
+                <div class="card-header fs-3" th:text="${movie.title}"></div>
+                <img th:src="@{${movie.poster_path}}" class="img-fluid" data-bs-toggle="tooltip"
+                    data-bs-placement="left" data-bs-title="Click For Movie Details" alt="">
+
+                <div class="card-body">
+                    <a th:href="@{/voting(page=${page}, movieCount=${movieCount}, tmdbMovieId=${movie.id}, vote=1)}"
+                        class="btn btn-dark fs-2 p-0">
+                        <i class="bi bi-hand-thumbs-up text-success m-1 p-1"></i>
+                    </a>
+
+                    <a th:href="@{/voting(page=${page}, movieCount=${movieCount}, tmdbMovieId=${movie.id}, vote=0)}"
+                        class="btn btn-dark fs-2 p-0">
+                        <i class="bi bi-hand-thumbs-down text-danger m-1 p-1"></i>
+                    </a>
+
+                    <span class="float-end">
+                        <th:block th:if="${likeStats[0] > 0}" th:each="like : ${#numbers.sequence(0, likeStats[0]-1)}">
+                            <i class="bi bi-check-circle-fill text-warning fs-3" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-title="Liked by a friend"></i>
+                        </th:block>
+
+                        <th:block th:if="${likeStats[1] > 0}" th:each="like : ${#numbers.sequence(0, likeStats[1]-1)}">
+                            <i class="bi bi-check-circle fs-3"></i>
+                        </th:block>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        var matched = [[${ matched }]];
+        window.onload = function () {
+
+            if (matched) {
+                var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                myModal.show();
+            }
+        }
+    </script>
+    <footer th:replace="~{fragments :: footer}"></footer>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Session</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+
+</head>
+
+<body class="bg-light">
+    <div class="d-flex justify-content-center">
+        <div class="card col-md-4 m-2">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-sliders"></i> Setup Your Session</h5>
+                <h6 class="card-subtitle mt-4 mb-2 text-muted">Add your crew:</h6>
+                <form th:action="@{/newsession/yoursession}" method="post" onsubmit="return checkCheckboxes()">
+                    <div id="input-cont">
+                        <input type="text" placeholder="Your name" class="form-control mb-4" name="names" required>
+                        <input type="text" placeholder="Your friends name" class="form-control mb-2" name="names"
+                            required>
+                    </div>
+
+                    <a href="#" class="btn btn-outline-dark mb-4" onclick="addInput()"><i class="bi bi-person-plus"></i>
+                        Add friend</a>
+                    <a href="#" class="btn btn-outline-dark mb-4 disabled" onclick="removeInput()" id="removeButton"
+                        style="pointer-events: none;"><i class="bi bi-person-dash"></i>
+                        Remove friend</a>
+                    <h6 class="card-subtitle mb-2 text-muted">Add genres:</h6>
+
+                    <div class="checkbox mb-2">
+                        <div class="form-check form-check-inline col-5 col-xl-3 mt-2">
+                            <input type="checkbox" class="form-check-input" id="allCb" name="allCB"
+                                onclick="uncheckAllCheckboxes()" checked>
+                            <label for="allCb" class="form-check-label">All</label>
+                        </div>
+                        <div th:each="genre : ${genres}" class="form-check form-check-inline col-5 col-xl-3 mt-2">
+                            <input type="checkbox" class="form-check-input" name="selectedGenres"
+                                th:id="'genre' + ${genre.id}" th:value="${genre.id}" onclick="uncheckElementAllCb()">
+                            <label th:for="'genre' + ${genre.id}" class="form-check-label"
+                                th:text="${genre.name}"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark w-100 my-2"><i class="bi bi-send"></i>
+                        Start</button>
+                </form>
+            </div>
+        </div>
+
+        <footer th:replace="~{fragments :: footer}"></footer>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <header th:replace="~{fragments :: headerfiles}"></header>
+</head>
+
+<body class="bg-light">
+    <div class="d-flex justify-content-center">
+        <div class="card col-md-4 m-2 p-4">
+            <h1><i class="bi bi-film"></i> Movie Match</h1>
+            <img th:src="@{/images/undraw_movie.svg/}" class="img-fluid my-4" alt="">
+            <h5 th:text="'Howdy ' + ${currentUser != null ? currentUser.name : 'Movie Enthusiast'} + ', sup?'"></h5>
+            <div class="col-12 col-sm-6 align-self-center">
+                <a class="btn btn-outline-dark my-1 w-100" th:href="@{/newsession}"><i class="bi bi-plus-circle"></i>
+                    New Session</a>
+
+                <a th:if="${currentSession} != null" class="btn btn-outline-dark my-1 w-100"
+                    th:href="@{/voting?page=1&movieCount=-1&vote=0}"><i class="bi bi-hand-thumbs-up"></i> To
+                    Voting</a>
+
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments :: footer}"></footer>
+</body>
+
+<!-- <body>
+    <div class="page-content">
+        <div class="d-flex justify-content-center">
+            <div class="auth-card col-md-4 m-2 p-4">
+                <h1 class="auth-title"><i class="bi bi-film"></i> Movie Match</h1>
+                <img th:src="@{/images/undraw_movie.svg/}" class="img-fluid my-4" alt="">
+
+                <h5 class="text"
+                    th:text="'Howdy ' + ${currentUser != null ? currentUser.name : 'Movie Enthusiast'} + ', sup?'">
+                </h5>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 align-self-center">
+                        <a class="btn service-btn w-100" th:href="@{/newsession}"><i class="bi bi-plus-circle"></i>
+                            New Session</a>
+
+                        <a th:if="${currentSession} != null" class="btn btn-outline-dark my-1 w-100"
+                            th:href="@{/voting?page=1&movieCount=-1&vote=0}"><i class="bi bi-hand-thumbs-up"></i> To
+                            Voting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer th:replace="~{fragments :: footer}"></footer>
+</body> -->
+
+</html>
