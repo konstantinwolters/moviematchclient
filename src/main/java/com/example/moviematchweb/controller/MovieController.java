@@ -1,5 +1,7 @@
 package com.example.moviematchweb.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,21 +52,16 @@ public class MovieController {
                 }
             }
 
-            // TMDB api limits results to 20 per request (=page) TODO: In eigene Methode
-            // auslagern und bereits gelikte Movies ausblenden
-            if (movieCount >= 19) {
-                movieCount = 0;
-                page += 1;
-            } else {
-                movieCount += 1;
-            }
+            Map<String, Integer> nextMoviePageAndCount = movieService.nextMoviePageAndCount(currentSession, page,
+                    movieCount);
 
-            MovieDTO movie = movieService.getMovieForVoting(apiKey, currentSession, page, movieCount);
+            MovieDTO movie = movieService.getMovieForVoting(apiKey, currentSession, nextMoviePageAndCount.get("page"),
+                    nextMoviePageAndCount.get("movieCount"));
             movie.setPoster_path(posterPath + movie.getPoster_path());
             model.addAttribute("matched", matched);
             model.addAttribute("likeStats", likeService.getMovieLikeStats(currentSession, movie.getId()));
-            model.addAttribute("page", page);
-            model.addAttribute("movieCount", movieCount);
+            model.addAttribute("page", nextMoviePageAndCount.get("page"));
+            model.addAttribute("movieCount", nextMoviePageAndCount.get("movieCount"));
             model.addAttribute("movie", movie);
             return "votings";
 

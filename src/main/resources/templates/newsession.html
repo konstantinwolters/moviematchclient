@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -10,11 +10,12 @@
 
 </head>
 
-<body class="bg-light">
+<body class="page-content">
     <div class="d-flex justify-content-center">
         <div class="card col-md-4 m-2">
             <div class="card-body">
-                <h5 class="card-title"><i class="bi bi-sliders"></i> Setup Your Session</h5>
+                <h5><i class="bi bi-sliders"></i> Setup Your Session</h5>
+                <hr>
                 <h6 class="card-subtitle mt-4 mb-2 text-muted">Add your crew:</h6>
                 <form th:action="@{/newsession/yoursession}" method="post" onsubmit="return checkCheckboxes()">
                     <div id="input-cont">
@@ -23,11 +24,14 @@
                             required>
                     </div>
 
-                    <a href="#" class="btn btn-outline-dark mb-4" onclick="addInput()"><i class="bi bi-person-plus"></i>
+                    <a href="#" class="btn btn-outline-light my-2" onclick="addInput()"><i
+                            class="bi bi-person-plus"></i>
                         Add friend</a>
-                    <a href="#" class="btn btn-outline-dark mb-4 disabled" onclick="removeInput()" id="removeButton"
+                    <a href="#" class="btn btn-outline-light disabled my-2" onclick="removeInput()" id="removeButton"
                         style="pointer-events: none;"><i class="bi bi-person-dash"></i>
                         Remove friend</a>
+                    <hr>
+
                     <h6 class="card-subtitle mb-2 text-muted">Add genres:</h6>
 
                     <div class="checkbox mb-2">
@@ -43,7 +47,7 @@
                                 th:text="${genre.name}"></label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-dark w-100 my-2"><i class="bi bi-send"></i>
+                    <button type="submit" class="btn btn-outline-light w-100 my-2"><i class="bi bi-send"></i>
                         Start</button>
                 </form>
             </div>

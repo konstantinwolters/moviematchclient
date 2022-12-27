@@ -13,7 +13,7 @@ function addInput() {
     containerCount += 1;
     let input = document.createElement('input');
     removeButton.removeAttribute("style");
-    removeButton.className = 'btn btn-outline-dark mb-4';
+    removeButton.className = 'btn btn-outline-light my-2';
 
     input.placeholder = 'Your friends name';
     input.id = 'friend' + containerCount;
@@ -30,7 +30,7 @@ function removeInput() {
     if (containerCount == 0) {
         const removeButton = document.getElementById('removeButton');
         removeButton.style.pointerEvents = 'none';
-        removeButton.className = 'btn btn-outline-dark mb-4 disabled';
+        removeButton.className = 'btn btn-outline-light m-2 disabled';
     }
 }
 
