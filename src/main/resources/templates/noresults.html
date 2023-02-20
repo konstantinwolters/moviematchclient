@@ -13,18 +13,20 @@
     <div class="d-flex justify-content-center">
         <div class="card col-md-4 m-2 p-4">
             <h1><i class="bi bi-film"></i> Movie Match</h1>
-            <img th:src="@{/images/undraw_movie.svg/}" class="img-fluid my-4" alt="">
-            <h5 th:text="'Howdy ' + ${currentUser != null ? currentUser.name : 'Movie Enthusiast'} + ', sup?'"></h5>
-            <div class="col-12 col-sm-6 align-self-center">
-                <a class="btn btn-outline-light my-1 w-100" th:href="@{/newsession}"><i class="bi bi-plus-circle"></i>
-                    New Session</a>
+            <img th:src="@{/images/undraw_noresults.svg/}" class="my-4" alt="">
+            <h5 th:text="${message}"></h5>
 
-                <a th:if="${currentSession} != null" class="btn btn-outline-light my-1 w-100"
-                    th:href="@{/voting?page=1&movieCount=-1&vote=0}"><i class="bi bi-hand-thumbs-up"></i> To
-                    Voting</a>
+            <p th:text="${errorMessage}"></p>
 
+            <a th:if="${IsNewSession}" href="javascript:history.back()"> Go Back to Settings.</a>
+
+            <div th:if="${!IsNewSession}">
+                <a href="#"> Go Back to Settings</a>
+                <br>
+                <a th:href="@{/enjoy}"> I'm done!</a>
             </div>
         </div>
+    </div>
     </div>
 
     <footer th:replace="~{fragments :: footer}"></footer>

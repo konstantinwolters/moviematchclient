@@ -13,8 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Genre {
 
-    private Long id;
-    private Integer tmdbGenreId;
-    private Session session;
-
+    Integer id;
+    String name;
 }

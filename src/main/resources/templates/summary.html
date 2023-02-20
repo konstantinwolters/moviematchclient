@@ -19,7 +19,7 @@
                 <div th:each="user : ${currentSession.users}" class="form-control mt-2">
                     <label for="users" class="form-check-label" th:text="${user.name}"></label>
                     <input type="text" class="form-control mb-2" th:id="${user.id}"
-                        th:value="${baseUrl} + '/' + ${currentSession.uuid} + '/' + ${user.id}" disabled>
+                        th:value="${baseUrl} + '/' + ${currentSession.id} + '/' + ${user.id}" disabled>
                     <a href="#" class="btn btn-outline-dark" th:onclick="copyToClipboard([[${user.id}]])"> <i
                             class="bi bi-clipboard"></i>
                     </a>

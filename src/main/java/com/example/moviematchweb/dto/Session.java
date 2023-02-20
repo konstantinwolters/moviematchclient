@@ -15,8 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Session {
-    private Long id;
-    private String uuid;
+
+    private String id;
     private LocalDate lastAccess;
     private List<User> users;
     private List<Genre> genres;

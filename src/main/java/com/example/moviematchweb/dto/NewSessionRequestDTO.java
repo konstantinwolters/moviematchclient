@@ -16,5 +16,5 @@ import lombok.Setter;
 public class NewSessionRequestDTO {
 
     List<String> names;
-    List<Integer> genres;
+    List<String> genres;
 }

@@ -2,7 +2,6 @@ package com.example.moviematchweb.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.moviematchweb.dto.GenreDTO;
 import com.example.moviematchweb.dto.Session;
 import com.example.moviematchweb.dto.User;
 import com.example.moviematchweb.proxy.MMProxy;
-import com.example.moviematchweb.proxy.TmdbProxy;
+import com.example.moviematchweb.service.GenreService;
 import com.example.moviematchweb.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,11 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class AppController {
 
     private final SessionService sessionService;
+    private final GenreService genreService;
     private final MMProxy mmProxy;
-    private final TmdbProxy tmdbProxy;
-
-    @Value("${tmdb.api.key}")
-    private String apiKey;
 
     @GetMapping(value = { "/", "/{sessionUuid}/{userId}" })
     public String blabla(
@@ -57,14 +52,13 @@ public class AppController {
     @GetMapping("/newsession")
     public String newSession(Model model) {
 
-        List<GenreDTO> genres = tmdbProxy.getGenres(apiKey).get("genres");
-        model.addAttribute("genres", genres);
+        model.addAttribute("genres", genreService.getGenres());
         return "newsession";
     }
 
     @PostMapping("/newsession/yoursession")
     public String yourSession(
-            @RequestParam(required = false) List<Integer> selectedGenres,
+            @RequestParam(required = false) List<String> selectedGenres,
             @RequestParam List<String> names,
             Model model,
             HttpSession httpSession,
