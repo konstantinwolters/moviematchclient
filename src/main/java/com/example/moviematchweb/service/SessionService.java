@@ -11,6 +11,6 @@ public interface SessionService {
 
     User getUserFromSessionByUserId(Session session, Long UserId);
 
-    Session addNewSession(HttpSession httpSession, List<Integer> selectedGenres, List<String> names);
+    Session addNewSession(HttpSession httpSession, List<String> selectedGenres, List<String> names);
 
 }

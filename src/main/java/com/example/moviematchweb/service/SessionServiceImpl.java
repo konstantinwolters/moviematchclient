@@ -2,7 +2,6 @@ package com.example.moviematchweb.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.moviematchweb.dto.NewSessionRequestDTO;
@@ -17,9 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
 
-    @Value("${tmdb.api.key}")
-    private String apiKey;
-
     private final MMProxy mmProxy;
 
     public User getUserFromSessionByUserId(Session session, Long UserId) {
@@ -31,24 +27,16 @@ public class SessionServiceImpl implements SessionService {
         return currentUser;
     }
 
-    public Session addNewSession(HttpSession httpSession, List<Integer> selectedGenres, List<String> names) {
+    public Session addNewSession(HttpSession httpSession, List<String> selectedGenres, List<String> names) {
         Session newSession;
 
-        if (selectedGenres == null) {
-            newSession = mmProxy.newSession(
-                    NewSessionRequestDTO.builder()
-                            .genres(null)
-                            .names(names)
-                            .build());
-        } else {
-            newSession = mmProxy.newSession(
-                    NewSessionRequestDTO.builder()
-                            .genres(selectedGenres)
-                            .names(names)
-                            .build());
-        }
+        newSession = mmProxy.newSession(
+                NewSessionRequestDTO.builder()
+                        .genres(selectedGenres)
+                        .names(names)
+                        .build());
 
-        httpSession.setAttribute("movieSession", newSession);
+        httpSession.setAttribute("currentSession", newSession);
         httpSession.setAttribute("currentUser", newSession.getUsers().get(0).getId());
 
         return newSession;

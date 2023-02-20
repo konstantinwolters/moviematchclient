@@ -3,15 +3,14 @@ package com.example.moviematchweb.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.example.moviematchweb.dto.Genre;
 import com.example.moviematchweb.dto.MovieDTO;
 import com.example.moviematchweb.dto.Session;
 import com.example.moviematchweb.exception.customExceptions.NoResultsException;
-import com.example.moviematchweb.proxy.TmdbProxy;
+import com.example.moviematchweb.proxy.MMProxy;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,26 +18,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
-        private final TmdbProxy tmdbProxy;
+        private final MMProxy mmProxy;
 
-        @Value("${tmdb.api.key}")
-        String apiKey;
-
-        public MovieDTO getMovieForVoting(String apiKey,
+        public MovieDTO getMovieForVoting(
                         Session currentSession,
                         Integer page,
                         Integer movieCount) {
 
-                List<MovieDTO> movies = tmdbProxy.getMovies(
-                                apiKey,
+                List<MovieDTO> movies = mmProxy.getMovies(
+                                currentSession.getId(),
+                                page,
                                 currentSession.getGenres().stream()
-                                                .map(Genre::getTmdbGenreId)
-                                                .toList()
-                                                .toString()
-                                                .replace("[", "")
-                                                .replace("]", ""),
-                                page)
-                                .getResults();
+                                                .map(Genre -> String.valueOf(Genre.getId()))
+                                                .collect(Collectors.joining("|")));
 
                 if (movies.size() == 0) {
                         throw new NoResultsException(true, "There are no results for your search parameters.");

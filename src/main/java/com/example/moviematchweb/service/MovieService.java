@@ -7,7 +7,7 @@ import com.example.moviematchweb.dto.Session;
 
 public interface MovieService {
 
-        MovieDTO getMovieForVoting(String apiKey, Session currentSession, Integer page, Integer movieCount);
+        MovieDTO getMovieForVoting(Session currentSession, Integer page, Integer movieCount);
 
         Map<String, Integer> nextMoviePageAndCount(Session currSession, Integer page, Integer movieCount);
 }

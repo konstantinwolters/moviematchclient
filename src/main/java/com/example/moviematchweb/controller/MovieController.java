@@ -2,7 +2,6 @@ package com.example.moviematchweb.controller;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +23,6 @@ public class MovieController {
     private final MovieService movieService;
     private final LikeService likeService;
 
-    @Value("${tmdb.api.key}")
-    String apiKey;
-
     String posterPath = "https://image.tmdb.org/t/p/w400";
 
     @GetMapping("/voting")
@@ -47,7 +43,7 @@ public class MovieController {
                 likeService.addLike(currentUser, tmdbMovieId);
                 matched = likeService.matched(currentSession, tmdbMovieId);
                 if (matched) {
-                    MovieDTO movie = movieService.getMovieForVoting(apiKey, currentSession, page, movieCount);
+                    MovieDTO movie = movieService.getMovieForVoting(currentSession, page, movieCount);
                     model.addAttribute("likedMoviePosterPath", posterPath + movie.getPoster_path());
                 }
             }
@@ -55,7 +51,7 @@ public class MovieController {
             Map<String, Integer> nextMoviePageAndCount = movieService.nextMoviePageAndCount(currentSession, page,
                     movieCount);
 
-            MovieDTO movie = movieService.getMovieForVoting(apiKey, currentSession, nextMoviePageAndCount.get("page"),
+            MovieDTO movie = movieService.getMovieForVoting(currentSession, nextMoviePageAndCount.get("page"),
                     nextMoviePageAndCount.get("movieCount"));
             movie.setPoster_path(posterPath + movie.getPoster_path());
             model.addAttribute("matched", matched);

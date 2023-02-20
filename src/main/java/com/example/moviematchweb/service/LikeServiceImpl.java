@@ -28,7 +28,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     public List<Integer> getMovieLikeStats(Session currentSession, Integer tmdbMovieId) {
-        Integer liked = mmProxy.getMatchedLikeCount(currentSession.getUuid(), tmdbMovieId);
+        Integer liked = mmProxy.getMatchedLikeCount(currentSession.getId(), tmdbMovieId);
         Integer notLiked = currentSession.getUsers().size() - liked;
 
         return Arrays.asList(liked, notLiked);
